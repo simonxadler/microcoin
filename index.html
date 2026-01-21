@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Withdrawal Requirements - Mining Sites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Mobile-First Ad Containers */
+        .ad-box {
+            width: 100%;
+            margin: 15px 0;
+            text-align: center;
+            position: relative;
+            min-height: 50px;
+        }
+        
+        .ad-box.wide {
+            min-height: 90px;
+        }
+        
+        .ad-box.square {
+            min-height: 250px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .ad-box.small {
+            min-height: 100px;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Ad iframe styling - Mobile first */
+        .ad-iframe {
+            width: 100% !important;
+            height: 100% !important;
+            border: none !important;
+            display: block;
+            margin: 0 auto;
+            background: transparent;
+            overflow: hidden;
+        }
+        
+        /* Specific sizes for different ad types */
+        .ad-iframe.wide-ad {
+            max-width: 728px;
+            height: 90px !important;
+        }
+        
+        .ad-iframe.square-ad {
+            max-width: 300px;
+            height: 250px !important;
+        }
+        
+        .ad-iframe.small-ad {
+            max-width: 320px;
+            height: 100px !important;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .ad-iframe.wide-ad {
+                height: 70px !important;
+                max-width: 100%;
+            }
+            
+            .ad-box.wide {
+                min-height: 70px;
+            }
+            
+            .ad-iframe.square-ad {
+                height: 200px !important;
+                max-width: 250px;
+            }
+            
+            .ad-box.square {
+                min-height: 200px;
+                max-width: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ad-iframe.wide-ad {
+                height: 50px !important;
+            }
+            
+            .ad-box.wide {
+                min-height: 50px;
+            }
+            
+            .ad-iframe.square-ad {
+                height: 180px !important;
+                max-width: 220px;
+            }
+            
+            .ad-box.square {
+                min-height: 180px;
+                max-width: 220px;
+            }
+            
+            .ad-iframe.small-ad {
+                height: 80px !important;
+                max-width: 280px;
+            }
+            
+            .ad-box.small {
+                min-height: 80px;
+                max-width: 280px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .ad-iframe.square-ad {
+                height: 150px !important;
+                max-width: 200px;
+            }
+            
+            .ad-box.square {
+                min-height: 150px;
+                max-width: 200px;
+            }
+        }
+        
+        /* Hidden tracker - keep it hidden */
+        .hidden-tracker {
+            position: absolute;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Main Content */
+        .header {
+            text-align: center;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #4cc9f0;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            line-height: 1.3;
+        }
+        
+        .site-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+        
+        .site-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .earn-btn {
+            background: linear-gradient(90deg, #4cc9f0, #4361ee);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.4);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .withdrawal-info {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .withdrawal-amount {
+            font-size: 1.3rem;
+            color: #4cc9f0;
+            display: block;
+            margin: 5px 0;
+        }
+        
+        .card-footer {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .visit-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        
+        .site-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(90deg, #3a0ca3, #4361ee);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        
+        /* Ad inside card - centered */
+        .card-ad {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        /* Loading state for ads */
+        .ad-loading {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive text */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .site-name {
+                font-size: 1.1rem;
+            }
+            
+            .earn-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .withdrawal-info {
+                font-size: 1rem;
+                padding: 10px;
+            }
+            
+            .withdrawal-amount {
+                font-size: 1.1rem;
+            }
+            
+            .visit-link {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                max-width: 220px;
+            }
+        }
+        
+        /* Ensure no horizontal scroll */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden tracker -->
+    <iframe id="popadsTracker" src="https://popads.online/bits-ads.php?type=0&&ids=244" class="hidden-tracker" scrolling="no" allowtransparency="true"></iframe>
+    
+    <div class="container">
+        <!-- Top Ad - ADBits.online -->
+        <div class="ad-box wide" id="ad-top">
+            <iframe src="https://adbits.online/bits-ads.php?type=1&&ids=566" class="ad-iframe wide-ad" scrolling="no" allowtransparency="true"></iframe>
+        </div>
+        
+        <div class="header">
+            <h1>Withdrawal Requirements - Mining Sites</h1>
+        </div>
+        
+        <!-- Ad under title - Zerads -->
+        <div class="ad-box wide" id="ad-under-title">
+            <iframe src="https://zerads.com/ad/ad.php?width=728&ref=10523" class="ad-iframe wide-ad" scrolling="no" frameborder="0"></iframe>
+        </div>
+        
+        <!-- First Site Card -->
+        <div class="site-card">
+            <div class="card-header">
+                <div class="site-name">
+                    <i class="fas fa-dog" style="color: #c2a633; font-size: 1.5rem;"></i>
+                    <span>DogeKing.io</span>
+                </div>
+                <a href="https://dogeking.io/?ref=Simonx11" target="_blank" class="earn-btn">
+                    <i class="fas fa-gem"></i> Earn
+                </a>
+            </div>
+            
+            <div class="card-body">
+                <div class="withdrawal-info" style="border-left: 4px solid #c2a633; background: rgba(194, 166, 51, 0.15);">
+                    <span>Minimum Withdrawal:</span>
+                    <span class="withdrawal-amount">15 Dogecoin 🐕</span>
+                    <div style="font-size: 0.9rem; color: #aaa; margin-top: 3px;">To start withdrawing your profits</div>
+                </div>
+                
+                <!-- Ad inside first card -->
+                <div class="card-ad">
+                    <div class="ad-box square" id="ad-inside-card-1">
+                        <iframe src="https://zerads.com/ad/ad.php?width=300&ref=10523" class="ad-iframe square-ad" scrolling="no" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <a href="https://dogeking.io/?ref=Simonx11" target="_blank" class="visit-link">
+                    <i class="fas fa-external-link-alt"></i> Visit Site
+                </a>
+                <div class="site-badge">🔥 DogeKing.io</div>
+            </div>
+        </div>
+        
+        <!-- Middle Ad - ad2bitcoin -->
+        <div class="ad-box wide" id="ad-middle">
+            <iframe src="https://ad2bitcoin.com/ad.php?ref=navask&width=728" class="ad-iframe wide-ad" scrolling="no" frameborder="0"></iframe>
+        </div>
+        
+        <!-- Second Site Card -->
+        <div class="site-card">
+            <div class="card-header">
+                <div class="site-name">
+                    <i class="fas fa-gem" style="color: #f0b90b; font-size: 1.5rem;"></i>
+                    <span>BNBKing.io 💎</span>
+                </div>
+                <a href="https://bnbking.io/?ref=mostafatoza" target="_blank" class="earn-btn">
+                    <i class="fas fa-gem"></i> Earn
+                </a>
+            </div>
+            
+            <div class="card-body">
+                <div class="withdrawal-info" style="border-left: 4px solid #f0b90b; background: rgba(240, 185, 11, 0.15);">
+                    <span>Minimum Withdrawal:</span>
+                    <span class="withdrawal-amount">0.0001 BNB 💎</span>
+                    <div style="font-size: 0.9rem; color: #aaa; margin-top: 3px;">To start withdrawing your profits</div>
+                </div>
+                
+                <!-- Ad inside second card -->
+                <div class="card-ad">
+                    <div class="ad-box square" id="ad-inside-card-2">
+                        <iframe src="https://zerads.com/ad/ad.php?width=300&ref=10523" class="ad-iframe square-ad" scrolling="no" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <a href="https://bnbking.io/?ref=mostafatoza" target="_blank" class="visit-link">
+                    <i class="fas fa-external-link-alt"></i> Visit Site
+                </a>
+                <div class="site-badge">🔥 BNBKing.io</div>
+            </div>
+        </div>
+        
+        <!-- Bottom Ad - ADBits.online -->
+        <div class="ad-box wide" id="ad-bottom">
+            <iframe src="https://adbits.online/bits-ads.php?type=1&&ids=566" class="ad-iframe wide-ad" scrolling="no" allowtransparency="true"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Mobile-optimized ad management
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - Initializing ads...');
+            
+            // Function to force iframe responsiveness
+            function makeIframesResponsive() {
+                const iframes = document.querySelectorAll('iframe');
+                console.log('Found ' + iframes.length + ' iframes');
+                
+                iframes.forEach((iframe, index) => {
+                    // Remove all inline width/height styles first
+                    iframe.style.width = '';
+                    iframe.style.height = '';
+                    
+                    // Remove width/height attributes
+                    iframe.removeAttribute('width');
+                    iframe.removeAttribute('height');
+                    
+                    // Force responsive behavior
+                    iframe.style.width = '100%';
+                    iframe.style.maxWidth = '100%';
+                    iframe.style.display = 'block';
+                    iframe.style.margin = '0 auto';
+                    
+                    // Set appropriate height based on class
+                    if (iframe.classList.contains('wide-ad')) {
+                        if (window.innerWidth <= 480) {
+                            iframe.style.height = '50px';
+                        } else if (window.innerWidth <= 768) {
+                            iframe.style.height = '70px';
+                        } else {
+                            iframe.style.height = '90px';
+                        }
+                    } else if (iframe.classList.contains('square-ad')) {
+                        if (window.innerWidth <= 360) {
+                            iframe.style.height = '150px';
+                            iframe.style.maxWidth = '200px';
+                        } else if (window.innerWidth <= 480) {
+                            iframe.style.height = '180px';
+                            iframe.style.maxWidth = '220px';
+                        } else if (window.innerWidth <= 768) {
+                            iframe.style.height = '200px';
+                            iframe.style.maxWidth = '250px';
+                        } else {
+                            iframe.style.height = '250px';
+                            iframe.style.maxWidth = '300px';
+                        }
+                    }
+                    
+                    // Log iframe info for debugging
+                    console.log(`Iframe ${index + 1}: ${iframe.src.substring(0, 50)}...`);
+                    console.log(`  - Width: ${iframe.offsetWidth}px`);
+                    console.log(`  - Height: ${iframe.offsetHeight}px`);
+                    console.log(`  - Visible: ${iframe.offsetWidth > 0 && iframe.offsetHeight > 0}`);
+                });
+            }
+            
+            // Initial call
+            makeIframesResponsive();
+            
+            // Recalculate on resize
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    console.log('Window resized to: ' + window.innerWidth + 'x' + window.innerHeight);
+                    makeIframesResponsive();
+                }, 250);
+            });
+            
+            // Also adjust after all content loads
+            window.addEventListener('load', function() {
+                console.log('Window fully loaded');
+                setTimeout(makeIframesResponsive, 1000);
+            });
+            
+            // Force mobile viewport
+            function setViewportForMobile() {
+                const viewport = document.querySelector('meta[name="viewport"]');
+                if (viewport && window.innerWidth <= 768) {
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                }
+            }
+            
+            setViewportForMobile();
+            
+            // Check if ads are visible
+            function checkAdVisibility() {
+                const ads = document.querySelectorAll('.ad-box');
+                ads.forEach((ad, index) => {
+                    const rect = ad.getBoundingClientRect();
+                    const isVisible = (
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    );
+                    
+                    console.log(`Ad ${index + 1} visibility: ${isVisible ? 'VISIBLE' : 'NOT VISIBLE'}`);
+                    console.log(`  - Position: top=${rect.top}, left=${rect.left}, width=${rect.width}, height=${rect.height}`);
+                    
+                    if (!isVisible && rect.width === 0) {
+                        console.log(`  - WARNING: Ad ${index + 1} has zero width!`);
+                    }
+                });
+            }
+            
+            // Run visibility check after a delay
+            setTimeout(checkAdVisibility, 2000);
+            
+            // Helper function to force reflow
+            function forceReflow(element) {
+                void element.offsetHeight;
+            }
+            
+            // Force reflow on ad containers
+            document.querySelectorAll('.ad-box').forEach(box => {
+                forceReflow(box);
+            });
+        });
+        
+        // Fallback for older browsers
+        if (!window.addEventListener) {
+            window.onload = function() {
+                const iframes = document.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    iframe.style.width = '100%';
+                    iframe.style.maxWidth = '728px';
+                    iframe.style.height = iframe.classList.contains('square-ad') ? '250px' : '90px';
+                });
+            };
+        }
+    </script>
+</body>
+      </html>
