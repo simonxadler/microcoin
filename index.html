@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal Requirements - Mining Sites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Ad Spaces */
+        .ad-placeholder {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .ad-top {
+            height: 100px;
+            margin-bottom: 30px;
+        }
+        
+        .ad-side-left, .ad-side-right {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 160px;
+            height: 600px;
+        }
+        
+        .ad-side-left {
+            left: 10px;
+        }
+        
+        .ad-side-right {
+            right: 10px;
+        }
+        
+        .ad-between {
+            height: 250px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-bottom {
+            height: 120px;
+            margin-top: 30px;
+        }
+        
+        .ad-small {
+            height: 100px;
+            margin: 15px 0;
+        }
+        
+        /* Popup Ad */
+        .ad-popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 100px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            display: none;
+        }
+        
+        /* Main Content */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            display: none; /* إخفاء العنوان */
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #4cc9f0;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .site-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .site-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .bnb-icon {
+            color: #f0b90b;
+            font-size: 1.8rem;
+        }
+        
+        .doge-icon {
+            color: #c2a633;
+            font-size: 1.8rem;
+        }
+        
+        .gem-icon {
+            color: #4cc9f0;
+            font-size: 1.8rem;
+        }
+        
+        .earn-btn {
+            background: linear-gradient(90deg, #4cc9f0, #4361ee);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .earn-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 7px 20px rgba(67, 97, 238, 0.6);
+        }
+        
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .withdrawal-info {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .bnb-bg {
+            background: rgba(240, 185, 11, 0.15);
+            border-left: 5px solid #f0b90b;
+        }
+        
+        .doge-bg {
+            background: rgba(194, 166, 51, 0.15);
+            border-left: 5px solid #c2a633;
+        }
+        
+        .withdrawal-amount {
+            font-size: 1.5rem;
+            color: #4cc9f0;
+            direction: ltr;
+            display: inline-block;
+        }
+        
+        .note {
+            font-size: 1rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .card-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .visit-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .visit-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.03);
+        }
+        
+        .site-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: linear-gradient(90deg, #3a0ca3, #4361ee);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        /* Ad inside card */
+        .card-ad {
+            height: 90px;
+            margin: 15px 0;
+        }
+        
+        /* Responsive for phones */
+        @media (max-width: 1200px) {
+            .ad-side-left, .ad-side-right {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ad-popup {
+                width: 280px;
+                height: 90px;
+            }
+            
+            .ad-top {
+                height: 80px;
+            }
+            
+            .ad-between {
+                height: 200px;
+            }
+            
+            .ad-bottom {
+                height: 100px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ad-popup {
+                width: 250px;
+                height: 80px;
+                bottom: 10px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+            
+            .site-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- إعلان CoinAds في الأعلى -->
+    <!--ADS BY https://coinads.online -->
+    <div class='ad-wire' coinads-type='1' coinads-userid='2554' ></div>
+    <!--ADS BY https://coinads.online -->
+    
+    <!-- إعلان Popads (مخفي) -->
+    <iframe id="popads.online" src="https://popads.online/bits-ads.php?type=0&&ids=244" scrolling="no" style="width:0px; height:0px; border:0px; padding:0; overflow:hidden" allowtransparency="true"></iframe>
+
+    <div class="container">
+        <!-- إعلان CoinAds الثاني -->
+        <!--ADS BY https://coinads.online -->
+        <div class='ad-wire' coinads-type='1' coinads-userid='2554' ></div>
+        <!--ADS BY https://coinads.online -->
+        
+        <!-- تم إزالة العنوان هنا -->
+        
+        <!-- إعلان Zerads -->
+        <div class="ad-placeholder ad-top">
+            <iframe src="https://zerads.com/ad/ad.php?width=728&ref=10523" marginwidth="0" marginheight="0" width="728" height="90" scrolling="no" border="0" frameborder="0"></iframe>
+        </div>
+        
+        <!-- First Site -->
+        <div class="site-card">
+            <div class="card-header">
+                <div class="site-name">
+                    <i class="fas fa-dog doge-icon"></i>
+                    <span>DogeKing.io</span>
+                </div>
+                <a href="https://dogeking.io/?ref=Simonx11" target="_blank" class="earn-btn">
+                    <i class="fas fa-gem"></i> Earn
+                </a>
+            </div>
+            
+            <!-- إعلان CoinAds الثالث داخل البطاقة -->
+            <!--ADS BY https://coinads.online -->
+            <div class='ad-wire' coinads-type='1' coinads-userid='2554' ></div>
+            <!--ADS BY https://coinads.online -->
+            
+            <div class="card-body">
+                <div class="withdrawal-info doge-bg">
+                    <span>Minimum Withdrawal:</span>
+                    <span class="withdrawal-amount">15 Dogecoin 🐕</span>
+                    <div class="note">To start withdrawing your profits</div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <a href="https://dogeking.io/?ref=Simonx11" target="_blank" class="visit-link">
+                    <i class="fas fa-external-link-alt"></i> Visit Site
+                </a>
+                <div class="site-badge">🔥 DogeKing.io</div>
+            </div>
+        </div>
+        
+        <!-- إعلان بين البطاقات -->
+        <div class="ad-placeholder ad-between">
+            <iframe src="https://ad2bitcoin.com/ad.php?ref=navask&width=300" marginwidth="0" marginheight="0" width="300" height="250" scrolling="no" border="0" frameborder="0"></iframe>
+        </div>
+        
+        <!-- Second Site -->
+        <div class="site-card">
+            <div class="card-header">
+                <div class="site-name">
+                    <i class="fas fa-gem gem-icon"></i>
+                    <span>BNBKing.io 💎</span>
+                </div>
+                <a href="https://bnbking.io/?ref=mostafatoza" target="_blank" class="earn-btn">
+                    <i class="fas fa-gem"></i> Earn
+                </a>
+            </div>
+            
+            <div class="card-body">
+                <div class="withdrawal-info bnb-bg">
+                    <span>Minimum Withdrawal:</span>
+                    <span class="withdrawal-amount">0.0001 BNB 💎</span>
+                    <div class="note">To start withdrawing your profits</div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <a href="https://bnbking.io/?ref=mostafatoza" target="_blank" class="visit-link">
+                    <i class="fas fa-external-link-alt"></i> Visit Site
+                </a>
+                <div class="site-badge">🔥 BNBKing.io</div>
+            </div>
+        </div>
+        
+        <!-- إعلان Zerads في الأسفل -->
+        <div class="ad-placeholder ad-bottom">
+            <iframe src="https://zerads.com/ad/ad.php?width=728&ref=10523" marginwidth="0" marginheight="0" width="728" height="90" scrolling="no" border="0" frameborder="0"></iframe>
+        </div>
+        
+        <!-- إعلان Zerads إضافي -->
+        <div class="ad-placeholder ad-small">
+            <iframe src="https://zerads.com/ad/ad.php?width=320&ref=10523" marginwidth="0" marginheight="0" width="320" height="50" scrolling="no" border="0" frameborder="0"></iframe>
+        </div>
+    </div>
+    
+    <!-- Popup Ad at bottom -->
+    <div class="ad-placeholder ad-popup">
+        <iframe src="https://zerads.com/ad/ad.php?width=320&ref=10523" marginwidth="0" marginheight="0" width="320" height="100" scrolling="no" border="0" frameborder="0"></iframe>
+    </div>
+    
+    <script>
+        // Close popup ad when clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const popupAd = document.querySelector('.ad-popup');
+            
+            setTimeout(() => {
+                if (popupAd) {
+                    popupAd.style.display = 'flex';
+                }
+            }, 3000);
+            
+            if (popupAd) {
+                popupAd.addEventListener('click', function() {
+                    this.style.display = 'none';
+                });
+                
+                // Auto close after 10 seconds
+                setTimeout(() => {
+                    popupAd.style.display = 'none';
+                }, 10000);
+            }
+        });
+    </script>
+</body>
+  </html>
